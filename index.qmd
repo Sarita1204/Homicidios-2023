@@ -1,0 +1,94 @@
+---
+title: "Análisis de homicios cometidos en Costa Rica en 2023"
+author: "Sarita Venegas"
+format: html
+---
+
+# Introducción
+Este edocumento presenta un conjunto de gráficos de hOmicidios cometidos en Costa Rica en el año 2023, de acuerdo con los datos del Organismo de Investigación Judicial (OIJ)
+
+# Lectura de datos
+
+```{r}
+#| labels: Lectura-datos
+
+delitos_2023 <-
+  read.csv("estadisticaspoliciales2023.csv")
+```
+
+# Filtrado de datos de homicidios 
+
+```{r}
+#| Label: filtrado-homicidios
+
+homicidios_2023 <- 
+  delitos_2023[delitos_2023$Delito == "HOMICIDIO", ]
+```
+
+# Gráfico de barras homicidios por provincia 
+
+El siguiente gráfico de barras muestra la cantidad de delitos por provincia 
+
+```{r}
+#| label: grafico-barras-homicidios-x-provincia
+
+homicidios_x_provincia <- table(homicidios_2023$Provincia)
+
+# Conteo de homicidios por provincia 
+homicidios_x_provincia <- table(homicidios_2023$Provincia)
+
+# Ordenamiento de la tabla de homicidios por provincia
+homicidios_x_provincia <- sort(homicidios_x_provincia, decreasing = TRUE)
+
+# Gráfico de barras
+barplot(
+  height = homicidios_x_provincia,
+  las = 2,
+  cex.names = 0.8
+)
+```
+
+# Homicidios por cantón
+
+```{r}
+#| label: grafico-barras-homicidios-x-canton
+
+# Conteo de homicidios por canton 
+homicidios_x_canton <- table(homicidios_2023$Canton)
+
+# Ordenamiento de la tabla de homicidios por cantón
+homicidios_x_canton <- sort(homicidios_x_canton, decreasing = TRUE)
+
+# Gráfco de barras
+barplot(
+  height = homicidios_x_canton,
+  las = 2,
+  cex.names = 0.5
+)
+
+```
+
+#Homicidios por género
+
+```{r}
+ #| label: grafico-barras-homicidios-x-genero
+
+# Conteo de homicidios por sexo 
+homicidios_x_genero <- table(homicidios_2023$Genero)
+
+# Ordenamiento de la tabla de homicidios por cantón
+homicidios_x_genero <- sort(homicidios_x_genero, decreasing = TRUE)
+
+# Gráfco de barras
+barplot(
+  height = homicidios_x_genero,
+  las = 2,
+  cex.names = 0.8
+)
+```
+
+
+
+
+
+
